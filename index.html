@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>SECURITY ALERT</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #000;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scanline {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(transparent 50%, rgba(0,255,0,0.02) 50%);
+  background-size: 100% 3px;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.box {
+  border: 3px solid #ff0000;
+  background: rgba(255,0,0,0.08);
+  padding: 30px 25px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 40px #ff0000;
+}
+
+.top-text {
+  font-size: 1.3rem;
+  color: #ffff00;
+  margin-bottom: 15px;
+  animation: blink 0.5s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+h1 {
+  font-size: 1.8rem;
+  color: #ff0000;
+  margin-bottom: 15px;
+}
+
+.terminal {
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: left;
+  margin: 15px 0;
+  min-height: 200px;
+  overflow: hidden;
+}
+.line {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: dropDown 0.6s forwards;
+}
+@keyframes dropDown {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.loading-bar {
+  width: 100%;
+  height: 22px;
+  border: 2px solid #00ff00;
+  margin: 15px 0;
+  position: relative;
+  background: #000;
+}
+.loading-fill {
+  height: 100%;
+  width: 0%;
+  background: #00ff00;
+  transition: width 0.1s;
+}
+.loading-percent {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 22px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.warning {
+  font-size: 1.1rem;
+  color: #ff0000;
+  margin-top: 10px;
+  animation: pulse 0.5s infinite;
+}
+@keyframes pulse { 50% { opacity: 0.5; } }
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="box">
+  <div class="top-text">YOUR DEVICE IS HACKED</div>
+
+  <h1>⚠️ SYSTEM COMPROMISED ⚠️</h1>
+
+  <div class="terminal" id="terminal"></div>
+
+  <div class="loading-bar">
+    <div class="loading-fill" id="fill"></div>
+    <div class="loading-percent" id="percent">0%</div>
+  </div>
+
+  <div class="warning">DO NOT CLOSE THIS WINDOW</div>
+</div>
+
+<script>
+// Full screen + block back
+document.addEventListener('contextmenu', e => e.preventDefault());
+history.pushState(null, null, location.href);
+window.onpopstate = () => history.go(1);
+
+// Lines na dahan dahan maglalabasan pababa
+const lines = [
+  'SYSTEM: Windows 11 Pro',
+  'IP Address: 192.168.x.xxx',
+  'Location: Cebu City, PH',
+  'Status: <span style="color:#ff0000">BREACH DETECTED</span>',
+  '',
+  'Initializing hack sequence...',
+  'Scanning system files...',
+  'Accessing user data...',
+  'Extracting passwords...',
+  'Uploading to server...',
+  'Hack complete! Device locked.'
+];
+
+let lineIndex = 0;
+const terminal = document.getElementById('terminal');
+
+// Dahan dahan maglabas ng line pababa
+function addLine() {
+  if(lineIndex < lines.length) {
+    const div = document.createElement('div');
+    div.className = 'line';
+    div.style.animationDelay = '0s';
+    div.innerHTML = lines[lineIndex];
+    terminal.appendChild(div);
+    lineIndex++;
+    setTimeout(addLine, 800); // 0.8 seconds per line
+  }
+}
+setTimeout(addLine, 1000); // Start after 1 sec
+
+// Loading % kasabay
+let p = 0;
+let interval = setInterval(() => {
+  p += 1;
+  document.getElementById('percent').innerText = p + '%';
+  document.getElementById('fill').style.width = p + '%';
+  if(p >= 100) clearInterval(interval);
+}, 60);
+
+// Tap for fullscreen
+document.body.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  }
+});
+</script>
+</body>
+</html>
