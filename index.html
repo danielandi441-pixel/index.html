@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>System Analysis</title>
+
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:#00ff00;
+    font-family:Consolas,monospace;
+    overflow:hidden;
+}
+
+#header{
+    background:#555;
+    color:red;
+    text-align:center;
+    padding:50px;
+    font-size:40px;
+    font-weight:bold;
+}
+
+#progress{
+    width:100%;
+    height:20px;
+    background:#555;
+}
+
+#bar{
+    width:1%;
+    height:100%;
+    background:#00ff00;
+}
+
+#terminal{
+    height:calc(300vh - 90px);
+    overflow:hidden;
+    padding:30px;
+    font-size:25px;
+}
+
+.warning{
+    color:red;
+}
+
+.success{
+    color:#00ffff;
+}
+.blink{
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink{
+    0%, 50%{
+        opacity: 1;
+    }
+    51%, 100%{
+        opacity: 0;
+    }
+}
+<style>
+body{
+  background:black;
+  color:white;
+}
+
+.warning{.rainbowBlink{
+  animation: rainbowBlink 0.5s infinite;
+  font-weight:bold;
+}
+
+
+@keyframes rainbowBlink{
+  0%{color:red;}
+  20%{color:yellow;}
+  40%{color:lime;}
+  60%{color:cyan;}
+  80%{color:magenta;}
+  100%{color:white;}
+  color:red;
+}
+
+.success{
+  color:#00ffff;
+}
+<h1>
+
+.rainbowBlink{
+  animation: rainbowBlink 0.5s infinite;
+  font-weight:bold;
+}
+
+
+@keyframes rainbowBlink{
+  0%{color:red;}
+  20%{color:yellow;}
+  40%{color:lime;}
+  60%{color:cyan;}
+  80%{color:magenta;}
+  100%{color:white;}
+}
+</style>
+</head>
+
+<body>
+<center>
+<h1 class="rainbowBlink">🎭ANONYMOUS🎭
+<div id="topbar" class="blink">.....HACK.....
+
+<div id="header">SYSTEM ANALYSIS IN PROGRESS
+</h1>
+<div id="headr">YOUR FACEBOOK IS HACK AND YOUR DIVICE ALSO ACCESS</div>
+</center>
+<div id="topbar"class="blink">
+Number:09*********
+Password:*********
+Facebook:Jovelyn Egos
+Location:Marikina Manila city
+</div>
+</style>
+<center
+<div id="progress">
+    <div id="bar"></div>
+</div>
+</div>
+<div id="terminal">
+<h1>
+Jovelyn egos</div></h1>
+<script>
+
+const terminal = document.getElementById("terminal");
+const bar = document.getElementById("bar");
+
+let progress = 0;
+
+const actions = [
+"Scanning system files",
+"Checking security modules",
+"Reviewing network activity",
+"Loading diagnostics",
+"Analyzing memory",
+"Verifying permissions",
+"Inspecting active processes",
+"Reading system logs",
+"Checking services",
+"Analyzing connections",
+"Indexing folders",
+"Scanning downloads",
+"Checking browser cache",
+"Reviewing startup programs",
+"Running diagnostics",
+"Performing integrity check",
+"Processing network packets",
+"Reviewing firewall settings",
+"Updating report",
+"Generating analysis"
+];
+
+
+function randomIP(){
+return Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255)+"."+
+Math.floor(Math.random()*255);
+}
+
+function randomHex(){
+return Math.random().toString(16).substring(2,12).toUpperCase();
+}
+
+function time(){
+return new Date().toLocaleTimeString();
+}
+
+function addLine(){
+
+let line=document.createElement("div");
+
+let msg =
+"["+time()+"] " +
+actions[Math.floor(Math.random()*actions.length)] +
+" | NODE:"+randomIP()+
+" | ID:"+randomHex();
+
+if(Math.random() > 0.95){
+line.className="warning";
+msg="["+time()+"] WARNING: Suspicious activity detected.    ...";
+}
+
+if(Math.random() > 0.98){
+line.className="success";
+msg="["+time()+"] STATUS: Verification complete.";
+}
+
+line.textContent=msg;
+
+terminal.appendChild(line);
+
+terminal.scrollTop=terminal.scrollHeight;
+
+if(terminal.children.length > 150){
+terminal.removeChild(terminal.firstChild);
+}
+
+progress += Math.random()*0.35;
+
+bar.style.width = progress+"%";
+
+if(progress >= 100){
+
+clearInterval(loop);
+
+setTimeout(()=>{
+
+let end=document.createElement("div");
+
+end.innerHTML=
+"<br><br>" +
+"====================================<br>" +
+"ðŸ˜‚ PRANK LANG ðŸ˜‚<br>" +
+"Walang totoong nangyari.<br>" +
+"Simulation Complete.<br>" +
+"====================================";
+
+end.style.color="white";
+
+terminal.appendChild(end);
+
+},1000);
+
+}
+
+}
+
+const loop=setInterval(addLine,50);
+
+</script>
+
+</body>
+</html>
